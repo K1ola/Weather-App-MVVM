@@ -79,6 +79,10 @@ public class MainFragment extends Fragment implements LifecycleOwner {
                 OpenSettingsFragment();
             }
         });
+
+        final DataViewModel viewModel =
+                ViewModelProviders.of(this).get(DataViewModel.class);
+        observeViewModel(viewModel);
     }
 
     private void OpenSettingsFragment() {

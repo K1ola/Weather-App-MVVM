@@ -1,15 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
     <data>
-
-        <variable
-            name="settingsViewModel"
-            type="com.example.myapplication.viewModel.SettingsViewModel" />
-
-        <variable
-            name="todayWeatherViewModel"
-            type="com.example.myapplication.viewModel.TodayWeatherViewModel" />
-
         <variable
             name="dataViewModel"
             type="com.example.myapplication.viewModel.DataViewModel" />
