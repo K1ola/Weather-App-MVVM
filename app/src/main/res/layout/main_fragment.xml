@@ -84,7 +84,7 @@
                 android:layout_marginRight="10dp"
                 android:fontFamily="sans-serif-thin"
                 android:contentDescription="Temperature"
-                android:text="@={dataViewModel.settings.currentTemperatureMeasure}"
+                android:text="@{dataViewModel.settings.currentTemperatureMeasure}"
                 android:textSize="40sp"
                 style="@style/WhiteText" />
 

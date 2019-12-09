@@ -17,16 +17,16 @@ public class Settings {
     public String currentPressureMeasure;
     public String currentWindMeasure;
 
-    public boolean isCelsius;
-    public boolean isHpa;
-    public boolean isMeters;
+    public static boolean isCelsius;
+    public static boolean isHpa;
+    public static boolean isMeters;
 
     private Settings() {}
 
     private Settings(boolean temperature, boolean pressure, boolean wind) {
-        this.isCelsius = temperature;
-        this.isHpa = pressure;
-        this.isMeters = wind;
+        isCelsius = temperature;
+        isHpa = pressure;
+        isMeters = wind;
     }
 
     private Settings(String temperature, String pressure, String wind) {
@@ -47,9 +47,9 @@ public class Settings {
 
     private Settings currentMeasure() {
         Settings settings = new Settings();
-        settings.currentTemperatureMeasure = this.isCelsius ? CELSIUS : FAHRENHEIT;
-        settings.currentPressureMeasure = this.isHpa ? HPA : MM_HG;
-        settings.currentWindMeasure = this.isMeters ? METERS_PER_SECOND : HOURS_PER_SECOND;
+        settings.currentTemperatureMeasure = isCelsius ? CELSIUS : FAHRENHEIT;
+        settings.currentPressureMeasure = isHpa ? HPA : MM_HG;
+        settings.currentWindMeasure = isMeters ? METERS_PER_SECOND : HOURS_PER_SECOND;
         return settings;
     }
 }

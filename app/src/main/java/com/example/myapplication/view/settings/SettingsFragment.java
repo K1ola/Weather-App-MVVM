@@ -94,27 +94,16 @@ public class SettingsFragment extends Fragment {
                     Boolean currentPressureMeasure = false;
                     Boolean currentWindMeasure = false;
 
-                    switch (switchElem) {
-                        case "switch_temperature":
-//                temperatureState = isChecked;
-                            currentTemperatureMeasure = isChecked;
-//
-//                saveData(temperatureState, temperatureKey);
-                        case "switch_pressure":
-//                pressureState = isChecked;
-
-                            currentPressureMeasure = isChecked;
-//
-//                saveData(pressureState, pressureKey);
-                        case "switch_wind":
-                            currentWindMeasure = isChecked;
-//                windState = isChecked;
-//
-//                saveData(windState, windKey);
-                            break;
-                        default:
-                            throw new IllegalStateException("Unexpected value: " + switchElem);
+                    if (switchElem.equals("switch_temperature")) {
+                        currentTemperatureMeasure = isChecked;
                     }
+                    if (switchElem.equals("switch_pressure")) {
+                        currentPressureMeasure = isChecked;
+                    }
+                    if (switchElem.equals("switch_wind")) {
+                        currentWindMeasure = isChecked;
+                    }
+
 
                     final DataViewModel viewModel =
                             ViewModelProviders.of(getActivity()).get(DataViewModel.class);
