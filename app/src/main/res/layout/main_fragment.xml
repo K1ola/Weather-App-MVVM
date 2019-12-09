@@ -9,6 +9,10 @@
         <variable
             name="todayWeatherViewModel"
             type="com.example.myapplication.viewModel.TodayWeatherViewModel" />
+
+        <variable
+            name="dataViewModel"
+            type="com.example.myapplication.viewModel.DataViewModel" />
     </data>
 
     <androidx.drawerlayout.widget.DrawerLayout
@@ -71,15 +75,15 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-<!--            <TextView-->
-<!--                android:id="@+id/temperature"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:fontFamily="sans-serif-thin"-->
-<!--                tools:text="@{todayWeatherViewModel.todayWeather.temperature}"-->
-<!--                android:textSize="20sp"-->
-<!--                style="@style/WhiteText" />-->
+            <TextView
+                android:id="@+id/temperature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="sans-serif-thin"
+                tools:text="@{dataViewModel.todayWeather.temperature}"
+                android:textSize="20sp"
+                style="@style/WhiteText" />
 
             <TextView
                 android:id="@+id/temperature_measure"
@@ -89,7 +93,7 @@
                 android:layout_marginRight="10dp"
                 android:fontFamily="sans-serif-thin"
                 android:contentDescription="Temperature"
-                tools:text="@{settingsViewModel.settings.currentTemperatureMeasure}"
+                tools:text="@{dataViewModel.settings.currentTemperatureMeasure}"
                 android:textSize="40sp"
                 style="@style/WhiteText" />
 
@@ -138,7 +142,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/Wet"
-                    android:text="@{String.format(@string/Wet, todayWeatherViewModel.todayWeather.wet)}"
+                    android:text="@{String.format(@string/Wet, dataViewModel.todayWeather.wet)}"
                     android:textSize="17sp"
                     style="@style/WhiteText" />
 
@@ -171,7 +175,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/Pressure"
-                    android:text="@{String.format(@string/Pressure, todayWeatherViewModel.todayWeather.pressure)}"
+                    android:text="@{String.format(@string/Pressure, dataViewModel.todayWeather.pressure)}"
                     android:textSize="17sp"
                     style="@style/WhiteText" />
 
@@ -179,7 +183,7 @@
                     android:id="@+id/pressure_measure"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="@{settingsViewModel.settings.currentPressureMeasure}"
+                    tools:text="@{dataViewModel.settings.currentPressureMeasure}"
                     android:textSize="17sp"
                     style="@style/WhiteText" />
             </LinearLayout>
@@ -204,7 +208,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/Wind"
-                    android:text="@{String.format(@string/Wind, todayWeatherViewModel.todayWeather.wind)}"
+                    android:text="@{String.format(@string/Wind, dataViewModel.todayWeather.wind)}"
                     android:textSize="17sp"
                     style="@style/WhiteText" />
 
@@ -212,7 +216,7 @@
                     android:id="@+id/wind_measure"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="@{settingsViewModel.settings.currentWindMeasure}"
+                    tools:text="@{dataViewModel.settings.currentWindMeasure}"
                     android:textSize="17sp"
                     style="@style/WhiteText" />
             </LinearLayout>

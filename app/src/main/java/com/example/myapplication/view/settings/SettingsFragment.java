@@ -1,4 +1,4 @@
-package com.example.myapplication.view.details;
+package com.example.myapplication.view.settings;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -20,7 +20,7 @@ import com.example.myapplication.R;
 import com.example.myapplication.databinding.SettingsFragmentBinding;
 import com.example.myapplication.model.Settings;
 import com.example.myapplication.view.main.MainFragment;
-import com.example.myapplication.viewModel.SettingsViewModel;
+import com.example.myapplication.viewModel.DataViewModel;
 
 public class SettingsFragment extends Fragment implements LifecycleOwner, CompoundButton.OnCheckedChangeListener {
     private SettingsFragmentBinding settingsFragmentBinding;
@@ -62,15 +62,15 @@ public class SettingsFragment extends Fragment implements LifecycleOwner, Compou
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        final SettingsViewModel viewModel =
-                ViewModelProviders.of(this).get(SettingsViewModel.class);
+        final DataViewModel viewModel =
+                ViewModelProviders.of(this).get(DataViewModel.class);
 
-        settingsFragmentBinding.setSettingsViewModel(viewModel);
+        settingsFragmentBinding.setDataViewModel(viewModel);
 
         observeViewModel(viewModel);
     }
 
-    private void observeViewModel(final SettingsViewModel viewModel) {
+    private void observeViewModel(final DataViewModel viewModel) {
         viewModel.getSettingsObservable().observe(this, new Observer<Settings>() {
             @Override
             public void onChanged(@Nullable Settings settings) {
@@ -119,8 +119,8 @@ public class SettingsFragment extends Fragment implements LifecycleOwner, Compou
                 throw new IllegalStateException("Unexpected value: " + switchElem);
         }
 
-        final SettingsViewModel viewModel =
-                ViewModelProviders.of(this).get(SettingsViewModel.class);
+        final DataViewModel viewModel =
+                ViewModelProviders.of(this).get(DataViewModel.class);
         final Boolean finalCurrentTemperatureMeasure = currentTemperatureMeasure;
         final Boolean finalCurrentPressureMeasure = currentPressureMeasure;
         final Boolean finalCurrentWindMeasure = currentWindMeasure;
