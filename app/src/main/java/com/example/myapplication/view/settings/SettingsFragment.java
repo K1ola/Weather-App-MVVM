@@ -22,7 +22,7 @@ import com.example.myapplication.model.Settings;
 import com.example.myapplication.view.main.MainFragment;
 import com.example.myapplication.viewModel.DataViewModel;
 
-public class SettingsFragment extends Fragment implements LifecycleOwner, CompoundButton.OnCheckedChangeListener {
+public class SettingsFragment extends Fragment {
     private SettingsFragmentBinding settingsFragmentBinding;
 
     @NonNull
@@ -63,7 +63,7 @@ public class SettingsFragment extends Fragment implements LifecycleOwner, Compou
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         final DataViewModel viewModel =
-                ViewModelProviders.of(this).get(DataViewModel.class);
+                ViewModelProviders.of(getActivity()).get(DataViewModel.class);
 
         settingsFragmentBinding.setDataViewModel(viewModel);
 
@@ -71,7 +71,7 @@ public class SettingsFragment extends Fragment implements LifecycleOwner, Compou
     }
 
     private void observeViewModel(final DataViewModel viewModel) {
-        viewModel.getSettingsObservable().observe(this, new Observer<Settings>() {
+        viewModel.getSettingsObservable().observe(getActivity(), new Observer<Settings>() {
             @Override
             public void onChanged(@Nullable Settings settings) {
                 if (settings != null) {
@@ -86,56 +86,104 @@ public class SettingsFragment extends Fragment implements LifecycleOwner, Compou
         Switch s = view.findViewById(idSwitch);
 //        s.setChecked(state);
         if (s != null) {
-            s.setOnCheckedChangeListener(this);
+            s.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    String switchElem = getResources().getResourceEntryName(buttonView.getId());
+
+                    Boolean currentTemperatureMeasure = false;
+                    Boolean currentPressureMeasure = false;
+                    Boolean currentWindMeasure = false;
+
+                    switch (switchElem) {
+                        case "switch_temperature":
+//                temperatureState = isChecked;
+                            currentTemperatureMeasure = isChecked;
+//
+//                saveData(temperatureState, temperatureKey);
+                        case "switch_pressure":
+//                pressureState = isChecked;
+
+                            currentPressureMeasure = isChecked;
+//
+//                saveData(pressureState, pressureKey);
+                        case "switch_wind":
+                            currentWindMeasure = isChecked;
+//                windState = isChecked;
+//
+//                saveData(windState, windKey);
+                            break;
+                        default:
+                            throw new IllegalStateException("Unexpected value: " + switchElem);
+                    }
+
+                    final DataViewModel viewModel =
+                            ViewModelProviders.of(getActivity()).get(DataViewModel.class);
+                    final Boolean finalCurrentTemperatureMeasure = currentTemperatureMeasure;
+                    final Boolean finalCurrentPressureMeasure = currentPressureMeasure;
+                    final Boolean finalCurrentWindMeasure = currentWindMeasure;
+                    viewModel.getSettingsObservable().observe(getActivity(), new Observer<Settings>() {
+                        @Override
+                        public void onChanged(@Nullable Settings settings) {
+                            if (settings != null) {
+                                settings.isCelsius = finalCurrentTemperatureMeasure;
+                                settings.isHpa = finalCurrentPressureMeasure;
+                                settings.isMeters = finalCurrentWindMeasure;
+
+                                viewModel.setSettings(settings);
+                            }
+                        }
+                    });
+                }
+            });
         }
     }
 
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        String switchElem = getResources().getResourceEntryName(buttonView.getId());
-
-        Boolean currentTemperatureMeasure = false;
-        Boolean currentPressureMeasure = false;
-        Boolean currentWindMeasure = false;
-
-        switch (switchElem) {
-            case "switch_temperature":
-//                temperatureState = isChecked;
-                currentTemperatureMeasure = isChecked;
+//        String switchElem = getResources().getResourceEntryName(buttonView.getId());
 //
-//                saveData(temperatureState, temperatureKey);
-            case "switch_pressure":
-//                pressureState = isChecked;
-
-                currentPressureMeasure = isChecked;
+//        Boolean currentTemperatureMeasure = false;
+//        Boolean currentPressureMeasure = false;
+//        Boolean currentWindMeasure = false;
 //
-//                saveData(pressureState, pressureKey);
-            case "switch_wind":
-                currentWindMeasure = isChecked;
-//                windState = isChecked;
+//        switch (switchElem) {
+//            case "switch_temperature":
+////                temperatureState = isChecked;
+//                currentTemperatureMeasure = isChecked;
+////
+////                saveData(temperatureState, temperatureKey);
+//            case "switch_pressure":
+////                pressureState = isChecked;
 //
-//                saveData(windState, windKey);
-                break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + switchElem);
-        }
-
-        final DataViewModel viewModel =
-                ViewModelProviders.of(this).get(DataViewModel.class);
-        final Boolean finalCurrentTemperatureMeasure = currentTemperatureMeasure;
-        final Boolean finalCurrentPressureMeasure = currentPressureMeasure;
-        final Boolean finalCurrentWindMeasure = currentWindMeasure;
-        viewModel.getSettingsObservable().observe(this, new Observer<Settings>() {
-            @Override
-            public void onChanged(@Nullable Settings settings) {
-                if (settings != null) {
-                    settings.isCelsius = finalCurrentTemperatureMeasure;
-                    settings.isHpa = finalCurrentPressureMeasure;
-                    settings.isMeters = finalCurrentWindMeasure;
-
-                    viewModel.setSettings(settings);
-                }
-            }
-        });
+//                currentPressureMeasure = isChecked;
+////
+////                saveData(pressureState, pressureKey);
+//            case "switch_wind":
+//                currentWindMeasure = isChecked;
+////                windState = isChecked;
+////
+////                saveData(windState, windKey);
+//                break;
+//            default:
+//                throw new IllegalStateException("Unexpected value: " + switchElem);
+//        }
+//
+//        final DataViewModel viewModel =
+//                ViewModelProviders.of(this).get(DataViewModel.class);
+//        final Boolean finalCurrentTemperatureMeasure = currentTemperatureMeasure;
+//        final Boolean finalCurrentPressureMeasure = currentPressureMeasure;
+//        final Boolean finalCurrentWindMeasure = currentWindMeasure;
+//        viewModel.getSettingsObservable().observe(this, new Observer<Settings>() {
+//            @Override
+//            public void onChanged(@Nullable Settings settings) {
+//                if (settings != null) {
+//                    settings.isCelsius = finalCurrentTemperatureMeasure;
+//                    settings.isHpa = finalCurrentPressureMeasure;
+//                    settings.isMeters = finalCurrentWindMeasure;
+//
+//                    viewModel.setSettings(settings);
+//                }
+//            }
+//        });
     }
 
     private void saveData(boolean flag, String key) {

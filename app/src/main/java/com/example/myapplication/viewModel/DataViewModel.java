@@ -6,15 +6,16 @@ import androidx.annotation.NonNull;
 import androidx.databinding.ObservableField;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.example.myapplication.model.Settings;
 import com.example.myapplication.model.TodayWeather;
 
 public class DataViewModel extends AndroidViewModel {
-    private final LiveData<Settings> settingsObservable;
+    private final MutableLiveData<Settings> settingsObservable;
     public ObservableField<Settings> settings = new ObservableField<>();
 
-    private final LiveData<TodayWeather> todayWeatherObservable;
+    private final MutableLiveData<TodayWeather> todayWeatherObservable;
     public ObservableField<TodayWeather> todayWeather = new ObservableField<>();
 
     public DataViewModel(@NonNull Application application) {
@@ -32,10 +33,12 @@ public class DataViewModel extends AndroidViewModel {
     }
 
     public void setSettings(Settings settings) {
+//        settingsObservable.setValue(settings);
         this.settings.set(settings);
     }
 
     public void setTodayWeather(TodayWeather todayWeather) {
+//        todayWeatherObservable.setValue(todayWeather);
         this.todayWeather.set(todayWeather);
     }
 

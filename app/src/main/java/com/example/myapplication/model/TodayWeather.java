@@ -22,7 +22,7 @@ public class TodayWeather {
         return new TodayWeather();
     }
 
-    public LiveData<TodayWeather> getTodayWeather() {
+    public MutableLiveData<TodayWeather> getTodayWeather() {
         MutableLiveData<TodayWeather> data = new MutableLiveData<>();
         data.setValue(new TodayWeather("some temp","some press",
                 "some wet",

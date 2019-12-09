@@ -39,7 +39,7 @@ public class Settings {
         return new Settings();
     }
 
-    public LiveData<Settings> getSettings() {
+    public MutableLiveData<Settings> getSettings() {
         MutableLiveData<Settings> data = new MutableLiveData<>();
         data.setValue(currentMeasure());
         return data;
