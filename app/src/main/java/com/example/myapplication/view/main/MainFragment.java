@@ -13,13 +13,18 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.R;
 import com.example.myapplication.databinding.MainFragmentBinding;
+import com.example.myapplication.model.HolderItem;
 import com.example.myapplication.model.Settings;
 import com.example.myapplication.model.TodayWeather;
 import com.example.myapplication.view.settings.SettingsFragment;
 import com.example.myapplication.viewModel.DataViewModel;
+
+import java.util.List;
 
 public class MainFragment extends Fragment implements LifecycleOwner {
     private MainFragmentBinding mainFragmentBinding;
@@ -39,6 +44,16 @@ public class MainFragment extends Fragment implements LifecycleOwner {
         final DataViewModel viewModel =
                 ViewModelProviders.of(this).get(DataViewModel.class);
         mainFragmentBinding.setDataViewModel(viewModel);
+
+
+        View view = mainFragmentBinding.getRoot();
+
+        final RecyclerView recyclerViewText = view.findViewById(R.id.list);
+        final LinearLayoutManager layoutManagerText = new LinearLayoutManager(getContext());
+
+        layoutManagerText.setOrientation(RecyclerView.HORIZONTAL);
+        recyclerViewText.setLayoutManager(layoutManagerText);
+        recyclerViewText.setAdapter(viewModel.getWeatherAdapter());
 
         observeViewModel(viewModel);
     }
@@ -64,6 +79,13 @@ public class MainFragment extends Fragment implements LifecycleOwner {
                     viewModel.setSettings(settings);
                     //projectAdapter.setProjectList(projects);
                 }
+            }
+        });
+
+        viewModel.getHolderItem().observe(this, new Observer<List<HolderItem>>() {
+            @Override
+            public void onChanged(List<HolderItem> holderItemList) {
+                viewModel.setHolderItemsInAdapter(holderItemList);
             }
         });
     }

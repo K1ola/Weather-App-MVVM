@@ -21,15 +21,15 @@ public class Settings {
     public static boolean isHpa;
     public static boolean isMeters;
 
-    private Settings() {}
+    public Settings() {}
 
-    private Settings(boolean temperature, boolean pressure, boolean wind) {
+    public Settings(boolean temperature, boolean pressure, boolean wind) {
         isCelsius = temperature;
         isHpa = pressure;
         isMeters = wind;
     }
 
-    private Settings(String temperature, String pressure, String wind) {
+    public Settings(String temperature, String pressure, String wind) {
         this.currentTemperatureMeasure = temperature;
         this.currentPressureMeasure = pressure;
         this.currentWindMeasure = wind;
