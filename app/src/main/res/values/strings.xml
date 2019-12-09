@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Weather App</string>
+    <string name="button">Add</string>
+    <string name="town">Москва</string>
+    <string name="Open">Open</string>
+    <string name="Close">Close</string>
+
+    <string name="Wind">Сила ветра: %s</string>
+    <string name="Pressure">Давление: %s</string>
+    <string name="Wet">Влажность: %s</string>
+</resources>
