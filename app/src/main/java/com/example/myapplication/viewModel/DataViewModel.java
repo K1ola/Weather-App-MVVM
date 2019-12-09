@@ -21,8 +21,8 @@ public class DataViewModel extends AndroidViewModel {
     public DataViewModel(@NonNull Application application) {
         super(application);
 
-        settingsObservable = Settings.getInstance().getSettings();
-        todayWeatherObservable = TodayWeather.getInstance().getTodayWeather();
+        settingsObservable = getSettings();
+        todayWeatherObservable = getTodayWeather();
     }
 
     public LiveData<Settings> getSettingsObservable() {
@@ -37,9 +37,23 @@ public class DataViewModel extends AndroidViewModel {
         this.settings.set(settings);
     }
 
+    public MutableLiveData<Settings> getSettings() {
+        MutableLiveData<Settings> data = new MutableLiveData<>();
+        data.setValue(Settings.currentMeasure());
+        return data;
+    }
+
     public void setTodayWeather(TodayWeather todayWeather) {
 //        todayWeatherObservable.setValue(todayWeather);
         this.todayWeather.set(todayWeather);
+    }
+
+    public MutableLiveData<TodayWeather> getTodayWeather() {
+        MutableLiveData<TodayWeather> data = new MutableLiveData<>();
+        data.setValue(new TodayWeather("some temp","some press",
+                "some wet",
+                "some wind"));
+        return data;
     }
 
 }

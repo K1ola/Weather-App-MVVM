@@ -39,13 +39,13 @@ public class Settings {
         return new Settings();
     }
 
-    public MutableLiveData<Settings> getSettings() {
-        MutableLiveData<Settings> data = new MutableLiveData<>();
-        data.setValue(currentMeasure());
-        return data;
-    }
+//    public MutableLiveData<Settings> getSettings() {
+//        MutableLiveData<Settings> data = new MutableLiveData<>();
+//        data.setValue(currentMeasure());
+//        return data;
+//    }
 
-    private Settings currentMeasure() {
+    public static Settings currentMeasure() {
         Settings settings = new Settings();
         settings.currentTemperatureMeasure = isCelsius ? CELSIUS : FAHRENHEIT;
         settings.currentPressureMeasure = isHpa ? HPA : MM_HG;

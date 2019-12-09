@@ -11,7 +11,7 @@ public class TodayWeather {
 
     private TodayWeather() {}
 
-    private TodayWeather(String temperature, String pressure, String wet, String wind) {
+    public TodayWeather(String temperature, String pressure, String wet, String wind) {
         this.temperature = temperature;
         this.pressure = pressure;
         this.wet = wet;
@@ -20,13 +20,5 @@ public class TodayWeather {
 
     public static TodayWeather getInstance() {
         return new TodayWeather();
-    }
-
-    public MutableLiveData<TodayWeather> getTodayWeather() {
-        MutableLiveData<TodayWeather> data = new MutableLiveData<>();
-        data.setValue(new TodayWeather("some temp","some press",
-                "some wet",
-                "some wind"));
-        return data;
     }
 }
